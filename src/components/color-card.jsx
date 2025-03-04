@@ -46,7 +46,7 @@ const ColorCard = ({ colorName }) => {
   // Get the specific color or use default if not available
   const color = themeColors[colorName] || DEFAULT_COLOR;
   
-  // Generate the actual color with the current hue
+  // Generate the actual color with the current hue for preview
   const colorValue = toOklchString({ 
     lightness: color.lightness || DEFAULT_COLOR.lightness, 
     chroma: color.chroma || DEFAULT_COLOR.chroma, 

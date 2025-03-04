@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { defaultConfig, defaultHue } from '@/lib/config-defaults';
-import { generateCss } from '@/lib/color-utils';
+import { generateCss, toOklchString } from '@/lib/color-utils';
 
 // Create context with default values to avoid undefined
 const ColorContext = createContext({
@@ -17,6 +17,104 @@ const ColorContext = createContext({
   generatedCss: '',
   exportToIni: () => ''
 });
+
+// Generate CSS for internal application styling
+const generateInternalCss = (config, hue) => {
+  // For internal use, we need to fully format the oklch values with the oklch() wrapper
+  const cssObj = {
+    ':root': {},
+    '.dark': {}
+  };
+  
+  // Process light theme
+  Object.entries(config.light).forEach(([key, { lightness, chroma }]) => {
+    cssObj[':root'][`--${key}`] = toOklchString({ lightness, chroma, hue });
+  });
+  
+  // Process dark theme
+  Object.entries(config.dark).forEach(([key, { lightness, chroma }]) => {
+    cssObj['.dark'][`--${key}`] = toOklchString({ lightness, chroma, hue });
+  });
+  
+  let result = '';
+  
+  for (const selector in cssObj) {
+    result += `${selector} {\n`;
+    
+    for (const prop in cssObj[selector]) {
+      result += `  ${prop}: ${cssObj[selector][prop]};\n`;
+    }
+    
+    result += '}\n\n';
+  }
+  
+  // Add base shadcn variables with wrappers
+  result += `@layer base {
+    :root {
+      --background: var(--background);
+      --foreground: var(--foreground);
+
+      --card: var(--card);
+      --card-foreground: var(--card-foreground);
+
+      --popover: var(--popover);
+      --popover-foreground: var(--popover-foreground);
+
+      --primary: var(--primary);
+      --primary-foreground: var(--primary-foreground);
+
+      --secondary: var(--secondary);
+      --secondary-foreground: var(--secondary-foreground);
+
+      --muted: var(--muted);
+      --muted-foreground: var(--muted-foreground);
+
+      --accent: var(--accent);
+      --accent-foreground: var(--accent-foreground);
+
+      --destructive: var(--destructive);
+      --destructive-foreground: var(--destructive-foreground);
+
+      --border: var(--border);
+      --input: var(--input);
+      --ring: var(--ring);
+      
+      --radius: 0.5rem;
+    }
+  
+    .dark {
+      --background: var(--background);
+      --foreground: var(--foreground);
+
+      --card: var(--card);
+      --card-foreground: var(--card-foreground);
+
+      --popover: var(--popover);
+      --popover-foreground: var(--popover-foreground);
+
+      --primary: var(--primary);
+      --primary-foreground: var(--primary-foreground);
+
+      --secondary: var(--secondary);
+      --secondary-foreground: var(--secondary-foreground);
+
+      --muted: var(--muted);
+      --muted-foreground: var(--muted-foreground);
+
+      --accent: var(--accent);
+      --accent-foreground: var(--accent-foreground);
+
+      --destructive: var(--destructive);
+      --destructive-foreground: var(--destructive-foreground);
+
+      --border: var(--border);
+      --input: var(--input);
+      --ring: var(--ring);
+    }
+  }`;
+  
+  return result;
+};
 
 export const ColorProvider = ({ children }) => {
   // Initialize with default values
@@ -50,12 +148,16 @@ export const ColorProvider = ({ children }) => {
     if (!isInitialized) return;
     
     try {
+      // Generate CSS for export (values only format)
       const css = generateCss(config, hue);
       setGeneratedCss(css);
       
+      // Generate CSS for internal styling (with oklch wrappers)
+      const internalCss = generateInternalCss(config, hue);
+      
       // Apply theme to the document for live preview
       const style = document.createElement('style');
-      style.textContent = css;
+      style.textContent = internalCss;
       style.setAttribute('id', 'theme-style');
       
       const existingStyle = document.getElementById('theme-style');

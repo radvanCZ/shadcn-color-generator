@@ -81,8 +81,8 @@ export const generateShadcnCssVars = () => {
   :root {
     --background: var(--background);
     --foreground: var(--foreground);
-    --backgroundhover: var(--background);
-    --colorhover: var(--foreground);      
+    --backgroundhover: var(--backgroundhover);
+    --colorhover: var(--colorhover);      
 
     --card: var(--card);
     --card-foreground: var(--card-foreground);
@@ -112,9 +112,9 @@ export const generateShadcnCssVars = () => {
     /* Form specific variables */
     --form-background: var(--form-background);
     --form-foreground: var(--form-foreground);
-    --form-inputbg: var(--form-placeholder);
-    --form-inputcolor: var(--form-focus-ring);
-    --form-border: var(--form-error);
+    --form-inputbg: var(--form-inputbg);
+    --form-inputcolor: var(--form-inputcolor);
+    --form-border: var(--form-border);
 
     --radius: 0.5rem;
   }
@@ -122,8 +122,8 @@ export const generateShadcnCssVars = () => {
   .dark {
     --background: var(--background);
     --foreground: var(--foreground);
-    --backgroundhover: var(--background);
-    --colorhover: var(--foreground);          
+    --backgroundhover: var(--backgroundhover);
+    --colorhover: var(--colorhover);          
 
     --card: var(--card);
     --card-foreground: var(--card-foreground);
@@ -153,9 +153,9 @@ export const generateShadcnCssVars = () => {
     /* Form specific variables */
     --form-background: var(--form-background);
     --form-foreground: var(--form-foreground);
-    --form-inputbg: var(--form-placeholder);
-    --form-inputcolor: var(--form-focus-ring);
-    --form-border: var(--form-error);
+    --form-inputbg: var(--form-inputbg);
+    --form-inputcolor: var(--form-inputcolor);
+    --form-border: var(--form-border);
 
     --radius: 0.5rem;      
   }

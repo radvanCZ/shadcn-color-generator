@@ -36,7 +36,7 @@ export const defaultConfig = {
   "dark": {
     "background": { lightness: 0.15, chroma: 0.015 },
     "foreground": { lightness: 0.98, chroma: 0.015 },
-    "backgroundhover": { lightness: 0.71 , chroma: 0.037 },
+    "backgroundhover": { lightness: 0.71, chroma: 0.037 },
     "colorhover": { lightness: 0.27, chroma: 0.037 },      
     "card": { lightness: 0.17, chroma: 0.015 },
     "card-foreground": { lightness: 0.98, chroma: 0.015 },
@@ -65,11 +65,10 @@ export const defaultConfig = {
   }
 };
 
-
 export const colorCategories = [
   {
     name: 'Base',
-    colors: ['background', 'foreground','backgroundhover','colorhover', 'card', 'card-foreground', 'popover', 'popover-foreground']
+    colors: ['background', 'foreground', 'backgroundhover', 'colorhover', 'card', 'card-foreground', 'popover', 'popover-foreground']
   },
   {
     name: 'Accent',
@@ -84,8 +83,6 @@ export const colorCategories = [
     colors: ['form-background', 'form-foreground', 'form-inputbg', 'form-inputcolor', 'form-border']
   }
 ];
-
-
 
 export const defaultHue = "250deg";
 

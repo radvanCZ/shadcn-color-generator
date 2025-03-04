@@ -53,6 +53,8 @@ const generateInternalCss = (config, hue) => {
     :root {
       --background: var(--background);
       --foreground: var(--foreground);
+      --backgroundhover: var(--backgroundhover);
+      --colorhover: var(--colorhover);
 
       --card: var(--card);
       --card-foreground: var(--card-foreground);
@@ -79,12 +81,21 @@ const generateInternalCss = (config, hue) => {
       --input: var(--input);
       --ring: var(--ring);
       
+      /* Form specific variables */
+      --form-background: var(--form-background);
+      --form-foreground: var(--form-foreground);
+      --form-inputbg: var(--form-inputbg);
+      --form-inputcolor: var(--form-inputcolor);
+      --form-border: var(--form-border);
+      
       --radius: 0.5rem;
     }
   
     .dark {
       --background: var(--background);
       --foreground: var(--foreground);
+      --backgroundhover: var(--backgroundhover);
+      --colorhover: var(--colorhover);
 
       --card: var(--card);
       --card-foreground: var(--card-foreground);
@@ -110,6 +121,13 @@ const generateInternalCss = (config, hue) => {
       --border: var(--border);
       --input: var(--input);
       --ring: var(--ring);
+      
+      /* Form specific variables */
+      --form-background: var(--form-background);
+      --form-foreground: var(--form-foreground);
+      --form-inputbg: var(--form-inputbg);
+      --form-inputcolor: var(--form-inputcolor);
+      --form-border: var(--form-border);
     }
   }`;
   
